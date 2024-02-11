@@ -135,8 +135,10 @@ setup.props["N Steps"] = "1"
 setup.props["Steps From"] = "0s"
 setup.props["Steps To"] = "0.002944111776447106s"
 setup.props["OutputPerObjectCoreLoss"] = True
-setup.props["OutputPerObjectSolidLoss"] = True
+setup.props["OutputPerObjectSolidLoss"] = False
 setup.props["OutputError"] = True
+setup.props["IsGeneralTransient"] = True
+setup.props["IsHalfPeriodicTransient"] = False
 setup.props["ScalarPotential"] = "Second Order"
 setup.props["SmoothBHCurve"] = False
 setup.update()
