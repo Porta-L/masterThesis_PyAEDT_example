@@ -1,4 +1,4 @@
-Lucien Porta\\
+Lucien Porta\
 Master Thesis - PyAEDT Example\\
 February 2024\\
 
