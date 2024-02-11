@@ -125,7 +125,7 @@ app.mesh.assign_length_mesh(['stator'], isinside=True, maxlength=0.005, maxel=No
 app.mesh.assign_length_mesh(['magnet_1', 'magnet_2'], isinside=True, maxlength=0.005, maxel=None, meshop_name="magnet")
 
 #%% setup settings
-app.set_core_losses(['stator'], value=True)
+app.set_core_losses(['stator'], value=False) #value is for coreLoss effect on field
 app.change_inductance_computation(compute_transient_inductance=True, incremental_matrix=False)
 pyaedt.settings.enable_pandas_output=True
 setup = app.create_setup(setupname="0334Hz")
@@ -146,8 +146,9 @@ setup.update()
 
 #%% validate, save and solve the setup
 app.validate_simple()
+app.save_project()
 app.analyze_setup("0334Hz")
-#app.save_project()
+app.save_project()
 
 #%% export results and plot torque
 app.export_mesh_stats("0334Hz")
