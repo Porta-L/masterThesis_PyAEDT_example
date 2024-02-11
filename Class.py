@@ -307,5 +307,5 @@ winding_B = phase_winding(
 
 winding_C = phase_winding(
     name = 'phase_C',
-    current="14.142*cos(1.0*2*pi*334.0*time-240deg)"
+    current="14.142*cos(2*pi*334.0*time-240deg)"
 )
