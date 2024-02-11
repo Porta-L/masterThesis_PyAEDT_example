@@ -125,7 +125,7 @@ app.mesh.assign_length_mesh(['stator'], isinside=True, maxlength=0.005, maxel=No
 app.mesh.assign_length_mesh(['magnet_1', 'magnet_2'], isinside=True, maxlength=0.005, maxel=None, meshop_name="magnet")
 
 #%% setup settings
-app.set_core_losses(['stator'], value=False)
+app.set_core_losses(['stator'], value=True)
 app.change_inductance_computation(compute_transient_inductance=True, incremental_matrix=False)
 pyaedt.settings.enable_pandas_output=True
 setup = app.create_setup(setupname="0334Hz")
@@ -136,7 +136,7 @@ setup.props["N Steps"] = "1"
 setup.props["Steps From"] = "0s"
 setup.props["Steps To"] = "0.002944111776447106s"
 setup.props["OutputPerObjectCoreLoss"] = True
-setup.props["OutputPerObjectSolidLoss"] = False
+setup.props["OutputPerObjectSolidLoss"] = True
 setup.props["OutputError"] = True
 setup.props["IsGeneralTransient"] = True
 setup.props["IsHalfPeriodicTransient"] = False
