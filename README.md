@@ -16,7 +16,3 @@ The program has been successfully tested with Ansys Electronics Desktop 2023R2 a
 
 Usage:\
 Simply run the 'main.py' script and make sure than 'Class.py' is available to be imported.
-
-Limitation:\
-If an error occurs when solving the setup, simply run the analysis manually from GUI -> In Analysis, right-click on 0334Hz and Analyze.\
-The problem should be resolved with Ansys AEDT 2024R1
