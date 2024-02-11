@@ -1,6 +1,6 @@
 #%% import libraries, objects and create Maxwell3d project
 import pandas
-import matplotlib
+import matplotlib.pyplot as plt
 import pyaedt
 from pyaedt import Maxwell3d
 from Class import object3d, conductor, magnet, material, phase_winding
@@ -156,4 +156,5 @@ app.export_mesh_stats("0334Hz")
 result=app.post.get_solution_data("Moving1.Torque")
 presult=pandas.concat([result.primary_sweep_values*10**-6,result.data_real()], axis=1, keys=['Time (ms)', 'Torque (Nm)'])
 presult.plot(x='Time (ms)',y='Torque (Nm)')
-app.release_desktop()
+plt.show()
+#app.release_desktop()
