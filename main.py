@@ -1,5 +1,6 @@
 #%% import libraries, objects and create Maxwell3d project
 import pandas
+import matplotlib
 import pyaedt
 from pyaedt import Maxwell3d
 from Class import object3d, conductor, magnet, material, phase_winding
