@@ -24,10 +24,10 @@ def createSurface(object3d) :
 for obj in object3d.obj_inst :
     createSurface(obj)
 
-# %% substract 2d geometries
+#%% substract 2d geometries
 app.modeler.subtract(app.modeler.get_object_from_name('stator'), app.modeler.get_object_from_name('stator_int'), keep_originals=False)
 
-# %% generate 3d geometries
+#%% generate 3d geometries
 def createBody(object3d):
     if object3d.coordinate3d != None:
         surface = app.modeler.get_object_from_name(object3d.name)
@@ -38,7 +38,7 @@ def createBody(object3d):
 for obj in object3d.obj_inst :
     createBody(obj)   
 
-# %% create materials
+#%% create materials
 def createMaterial(material):
     mat = app.materials.add_material(material.name)
     mat.mass_density = material.density
@@ -53,7 +53,7 @@ def createMaterial(material):
 for mat in material.mat_inst:
     createMaterial(mat)
 
-# %% assign material to objects
+#%% assign material to objects
 def assignMaterial(object3d):
     if object3d.material != None:
         object = app.modeler.get_object_from_name(object3d.name)
@@ -62,7 +62,7 @@ def assignMaterial(object3d):
 for obj in object3d.obj_inst:
     assignMaterial(obj)
 
-# %% create the phases and assign currents
+#%% create the phases and assign currents
 def createPhaseWinding(phase_winding):
     app.assign_winding(coil_terminals=None, winding_type="Current", is_solid=False, current_value=phase_winding.current, parallel_branches=1, name=phase_winding.name)
 
@@ -89,7 +89,7 @@ def assignCoilToPhase(conductor):
 for cond in conductor.cond_inst:
     assignCoilToPhase(cond)
 
-# %% set magnetization on the magnets
+#%% set magnetization on the magnets
 def assignMagnetization(magnet):
     obj = app.modeler.get_object_from_name(magnet.name)
     mat = app.materials.duplicate_material(material_name=magnet.material, new_name=magnet.name)
@@ -125,8 +125,9 @@ app.mesh.assign_length_mesh(['stator'], isinside=True, maxlength=0.005, maxel=No
 app.mesh.assign_length_mesh(['magnet_1', 'magnet_2'], isinside=True, maxlength=0.005, maxel=None, meshop_name="magnet")
 
 #%% setup settings
+app.set_core_losses(['stator'], value=False)
 app.change_inductance_computation(compute_transient_inductance=True, incremental_matrix=False)
-app.set_core_losses(['stator'], value=True)
+pyaedt.settings.enable_pandas_output=True
 setup = app.create_setup(setupname="0334Hz")
 setup.props["StopTime"] = "0.002944111776447106s"
 setup.props["TimeStep"] = "4.990019960079841e-05s"
@@ -142,12 +143,11 @@ setup.props["IsHalfPeriodicTransient"] = False
 setup.props["ScalarPotential"] = "Second Order"
 setup.props["SmoothBHCurve"] = False
 setup.update()
-pyaedt.settings.enable_pandas_output=True
 
 #%% validate, save and solve the setup
 app.validate_simple()
-app.save_project()
 app.analyze_setup("0334Hz")
+#app.save_project()
 
 #%% export results and plot torque
 app.export_mesh_stats("0334Hz")
